@@ -25,14 +25,35 @@ pip install -r requirements.txt
 
 Then you, if you have `jupyter notebook` you can use the [`example_notebook.ipynb`](./example_notebook.ipynb), or from a Python console
 ```python
-import sfu_cosmo_plots as splots
-import numpy as np
-import matplotlib.pyplot as plt
+import sfu_cosmo_plots.contour_2D as splots
 
-dir_root = './example_data/'
-file_root = 'example_1_mu_sigma'
-out_root = './plots/'
-splots.plot_contour_2D(dir_root, file_root, out_root)
+# root_dir is the directory where the data is stored
+root_dir = './example_data/'
+
+# root_file is a list of files with the root of the dataset analyzed
+root_file = ["MG_2_DE0_mnu_DES_std_2D_sigma0m1_mu0m1", "MG_2_DE2_mnu_DES_std_2D_sigma0m1_mu0m1"]
+
+# output image name (without .pdf or .png)
+out_root = 'test_plot'
+
+# labels for the daasets (length has to match that of root_file)
+labels = [r'$\Lambda$CDM', r'$(w_0, w_a)$']
+
+splots.contour_2D_plot(root_dir=root_dir, 
+                       file_root=root_file, 
+                       out_root=out_root, 
+                       x_label=r'$\mu_0 - 1$',
+                       y_label=r'$\Sigma_0 -1$',
+                       labels=labels, 
+                       n_datasets=2, 
+                       x_lim=(-1,1), 
+                       y_lim=(-0.3,0.3), 
+                       use_latex_font=True, 
+                       hlines=None, 
+                       vlines=None,
+                       legend_loc='upper right', 
+                       figsize=(8,6), 
+                       alpha=0.65)
 ```
 ### 1.2 Running on SYGYZY
 Log in on [syzygy](https://sfu.syzygy.ca) with SFU credentials.
