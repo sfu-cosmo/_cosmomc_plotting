@@ -23,7 +23,12 @@ def contour_2D_plot(root_dir,
                    vlines=None,
                    legend_loc='upper right',
                    figsize=(8, 6),
-                   alpha=0.65):
+                   alpha=0.65, 
+                   bounds_68_x=None,
+                   bounds_95_x=None,
+                   bounds_68_y=None,
+                   bounds_95_y=None,
+                   ):
     """
     This function creates the contour plot.
     """
@@ -111,6 +116,18 @@ def contour_2D_plot(root_dir,
         for vx in vlines:
             plt.axhline(vx, linewidth = 0.75, color='black', alpha=0.25, linestyle='--')
     
+    if bounds_68_x is not None:
+        plt.axvspan(bounds_68_x[0], bounds_68_x[1], color='grey', alpha=0.5)
+        
+    if bounds_95_x is not None:
+        plt.axvspan(bounds_95_x[0], bounds_95_x[1], color='grey', alpha=0.25)
+        
+    if bounds_68_y is not None:
+        plt.axhspan(bounds_68_y[0], bounds_68_y[1], color='grey', alpha=0.25)
+        
+    if bounds_95_y is not None:
+        plt.axhspan(bounds_95_x[0], bounds_95_x[1], color='grey', alpha=0.25)
+
 
     pil.savefig('./plots/'+out_root+'.pdf', bbox_inches='tight')
     pil.savefig('./plots/'+out_root+'.png', bbox_inches='tight')
